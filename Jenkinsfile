@@ -27,7 +27,7 @@ pipeline {
 
         stage('Delivery') {
             steps {
-                sshagent(['my-ssh-key']) {
+                sshagent(['jenkins']) {
                     sh "scp -P 2222 start-${env.BUILD_NUMBER}.tar.gz vagrant@192.168.16.1:/home/vagrant/37_lesson/"
                 }
             }
