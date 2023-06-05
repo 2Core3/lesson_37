@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-
+    agent {
+    label 'vagrant18'
+    }
     parameters {
         string(name: 'SCRIPT_NAME', defaultValue: 'start1.sh', description: 'Имя запущенного скрпита')
     }
@@ -27,8 +28,8 @@ pipeline {
 
         stage('Delivery') {
             steps {
-                sshagent(['jenkins-vagrant']) {
-                    sh "scp -P 22 start-${env.BUILD_NUMBER}.tar.gz vagrant@192.168.96.1:/home/vagrant/37_lesson/"
+                sshagent(['vagrant18-22']) {
+                    sh "scp -P 22 start-${env.BUILD_NUMBER}.tar.gz vagrant@192.168.56.3:/home/vagrant/37_lesson/"
                 }
             }
         }
@@ -41,3 +42,4 @@ pipeline {
         }
     }
 }
+
